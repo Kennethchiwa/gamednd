@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#container {
+display: flex;
+flex-wrap: wrap;
+justify-content: space-around;
+}
+
+.target {
+width: 100px;
+height: 100px;
+border: 1px solid black;
+text-align: center;
+line-height: 100px;
+font-size: 20px;
+}
+
+.shape {
+width: 50px;
+height: 50px;
+background-color: lightblue;
+border-radius: 50%;
+text-align: center;
+line-height: 50px;
+font-size: 20px;
+margin: 10px;
+cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<h1>Drag and Drop the Shapes</h1>
+
+<div id="container">
+<div class="target" id="target1" ondragover="allowDrop(event)" ondrop="drop(event)">Target 1</div>
+<div class="target" id="target2" ondragover="allowDrop(event)" ondrop="drop(event)">Target 2</div>
+<div class="target" id="target3" ondragover="allowDrop(event)" ondrop="drop(event)">Target 3</div>
+<div class="target" id="target4" ondragover="allowDrop(event)" ondrop="drop(event)">Target 4</div>
+<div class="target" id="target5" ondragover="allowDrop(event)" ondrop="drop(event)">Target 5</div>
+<div class="target" id="target6" ondragover="allowDrop(event)" ondrop="drop(event)">Target 6</div>
+<div class="target" id="target7" ondragover="allowDrop(event)" ondrop="drop(event)">Target 7</div>
+<div class="target" id="target8" ondragover="allowDrop(event)" ondrop="drop(event)">Target 8</div>
+<div class="target" id="target9" ondragover="allowDrop(event)" ondrop="drop(event)">Target 9</div>
+<div class="target" id="target10" ondragover="allowDrop(event)" ondrop="drop(event)">Target 10</div>
+</div>
+
+<div id="shapes">
+<div class="shape" id="shape1" draggable="true" ondragstart="drag(event)">Shape 1</div>
+<div class="shape" id="shape2" draggable="true" ondragstart="drag(event)">Shape 2</div>
+<div class="shape" id="shape3" draggable="true" ondragstart="drag(event)">Shape 3</div>
+<div class="shape" id="shape4" draggable="true" ondragstart="drag(event)">Shape 4</div>
+<div class="shape" id="shape5" draggable="true" ondragstart="drag(event)">Shape 5</div>
+<div class="shape" id="shape6" draggable="true" ondragstart="drag(event)">Shape 6</div>
+<div class="shape" id="shape7" draggable="true" ondragstart="drag(event)">Shape 7</div>
+<div class="shape" id="shape8" draggable="true" ondragstart="drag(event)">Shape 8</div>
+<div class="shape" id="shape9" draggable="true" ondragstart="drag(event)">Shape 9</div>
+<div class="shape" id="shape10" draggable="true" ondragstart="drag(event)">Shape 10</div>
+</div>
+
+<script>
+function allowDrop(ev) {
+ev.preventDefault();
+}
+
+function drag(ev) {
+ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+ev.preventDefault();
+var data = ev.dataTransfer.getData("text");
+var shape = document.getElementById(data);
+ev.target.appendChild(shape);
+}
+
+for (var i = 1; i <= 10; i++) {
+var target = document.getElementById("target" + i);
+target.addEventListener("dragover", allowDrop);
+target.addEventListener("drop", drop);
+}
+
+for (var i = 1; i <= 10; i++) {
+var shape = document.getElementById("shape" + i);
+shape.addEventListener("dragstart", drag);
+}
+</script>
+
+</body>
+</html>
